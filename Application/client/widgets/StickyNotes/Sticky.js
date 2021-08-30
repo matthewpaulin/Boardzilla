@@ -12,7 +12,7 @@ import { attemptUpdateSticky, attemptDeleteSticky } from "_thunks/stickies"; //
 
 import ConfirmModal from "_components/ConfirmModal";
 
-export default function Sticky({id, text, color, textColor, remove}) {
+export default function Sticky({ id, text, color, textColor, remove }) {
   const dispatch = useDispatch();
 
   const [currentText, setCurrentText] = useState(text);
@@ -42,14 +42,18 @@ export default function Sticky({id, text, color, textColor, remove}) {
     }
   };
 
-  const deleteSticky = () => {remove(id); dispatch(attemptDeleteSticky(id))};
+  const deleteSticky = () => {
+    remove(id);
+    dispatch(attemptDeleteSticky(id));
+  };
   const updateColor = (e) => setCurrentColor(e.target.value);
   const updateTextColor = (e) => setCurrentTextColor(e.target.value);
   return (
-    <div className={`card mb-3 px-2 height-100`}>
+    <div className={`card mb-3 height-100`}>
       <div
         className="card-content height-calc"
-        style={{ backgroundColor: currentColor, color: currentTextColor }}>
+        style={{ backgroundColor: currentColor, color: currentTextColor }}
+      >
         <div className="content">
           {edit ? (
             <>
@@ -59,17 +63,27 @@ export default function Sticky({id, text, color, textColor, remove}) {
                 onChange={updateText}
               />
 
-              <div className="field is-grouped is-grouped-centered pt-2">
-                <label className="label">Text Color</label>
-                <div className="control pl-2">
+              <div className="field is-grouped is-grouped-centered mt-2">
+                <label
+                  className="label has-background-light p-2"
+                  style={{ marginBottom: 0 }}
+                >
+                  Text Color
+                </label>
+                <div className="control p-2 has-background-light">
                   <input
                     type="color"
                     value={currentTextColor}
                     onChange={updateTextColor}
                   />
                 </div>
-                <label className="label">Background Color </label>
-                <div className="control pl-2">
+                <label
+                  className="label p-2 has-background-light"
+                  style={{ marginBottom: 0 }}
+                >
+                  Background Color
+                </label>
+                <div className="control p-2 has-background-light">
                   <input
                     type="color"
                     value={currentColor}
@@ -84,7 +98,7 @@ export default function Sticky({id, text, color, textColor, remove}) {
         </div>
       </div>
 
-      <div className="card-footer level py-2">
+      <div className="card-footer level p-2">
         <div className="level-left" />
         <div className="level-right">
           {edit ? (
@@ -93,7 +107,8 @@ export default function Sticky({id, text, color, textColor, remove}) {
                 <button
                   className="button is-success"
                   onClick={handleUpdateSticky}
-                  onKeyPress={handleUpdateSticky}>
+                  onKeyPress={handleUpdateSticky}
+                >
                   <span className="icon is-small">
                     <FontAwesomeIcon icon={faSave} />
                   </span>
@@ -103,7 +118,8 @@ export default function Sticky({id, text, color, textColor, remove}) {
                 <button
                   className="button is-warning has-text-centered"
                   onClick={cancelEdit}
-                  onKeyPress={cancelEdit}>
+                  onKeyPress={cancelEdit}
+                >
                   <span className="icon is-small">
                     <FontAwesomeIcon icon={faBan} />
                   </span>
@@ -115,7 +131,8 @@ export default function Sticky({id, text, color, textColor, remove}) {
               <button
                 className="button is-dark has-text-centered"
                 onClick={editSticky}
-                onKeyPress={editSticky}>
+                onKeyPress={editSticky}
+              >
                 <span className="icon is-small">
                   <FontAwesomeIcon icon={faPencilAlt} />
                 </span>
@@ -126,7 +143,8 @@ export default function Sticky({id, text, color, textColor, remove}) {
             <button
               className="button is-danger is-outlined has-text-centered"
               onClick={openModal}
-              onKeyPress={openModal}>
+              onKeyPress={openModal}
+            >
               <span className="icon is-small">
                 <FontAwesomeIcon icon={faTimes} />
               </span>

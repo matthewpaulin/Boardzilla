@@ -54,14 +54,12 @@ export const Cal = () => {
 
   return (
     !loading && (
-      <div className={`card mb-3 px-2 py-2 height-100`}>
+      <div
+        className="card mb-3 px-2 py-2 height-100"
+        style={{ overflow: "auto" }}
+      >
         <div className="content has-text-centered">
-          <button
-            className="button is-dark is-rounded"
-            onClick={() => setAdd(true)}>
-            Add Event
-          </button>
-          <div className="calendar">
+          <div className="calendar mb-2">
             <div className="calendar__container">
               <main className="calendar__container__content">
                 <Calendar
@@ -79,6 +77,12 @@ export const Cal = () => {
               </main>
             </div>
           </div>
+          <button
+            className="button mb-2 is-dark is-rounded"
+            onClick={() => setAdd(true)}
+          >
+            Add Event
+          </button>
           {add ? (
             <div>
               <textarea
@@ -89,11 +93,12 @@ export const Cal = () => {
               />
               <button
                 className="button is-dark is-outlined m-3"
-                onClick={cancelAddEvent}>
+                onClick={cancelAddEvent}
+              >
                 Cancel
               </button>
               <button className="button is-dark m-3" onClick={handleAddEvent}>
-                Add Event
+                Save
               </button>
             </div>
           ) : (
@@ -106,11 +111,19 @@ export const Cal = () => {
                       <button
                         className="delete"
                         aria-label="delete"
-                        onClick={() =>
-                          dispatch(attemptDeleteEvent(w.id))
-                        }></button>
+                        onClick={() => dispatch(attemptDeleteEvent(w.id))}
+                      ></button>
                     </div>
-                    <div className="message-body">{w.text}</div>
+                    <div
+                      className="message-body"
+                      style={{
+                        borderBottom: "1px solid black",
+                        borderRight: "1px solid black",
+                        borderLeft: "1px solid black",
+                      }}
+                    >
+                      {w.text}
+                    </div>
                   </article>
                 );
               })

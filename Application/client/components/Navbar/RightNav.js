@@ -13,7 +13,7 @@ const Ul = styled.ul`
   z-index: 19;
   text-align: center;
   font-weight: bold;
-
+  height: 100%;
   li {
     color: #f7f7f7;
     padding: 16px 20px;
@@ -23,16 +23,15 @@ const Ul = styled.ul`
     text-decoration: underline;
   }
   .active {
-    background: hsl(348, 100%, 61%);
+    background: hsl(204, 86%, 53%);
   }
   a {
-    height: 40px;
     margin: auto 10px;
   }
   .disabled-link {
-    pointer-events: none; //This makes it not clickable
+    pointer-events: none;
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1050px) {
     flex-flow: column nowrap;
     background-color: #292b2c;
     position: fixed;
@@ -65,83 +64,8 @@ export default function RightNav({ open, setOpen, pathname }) {
     setAuth(!R.isEmpty(user));
   }, [user.username]);
 
-  // const isHome =
-  //   pathname.length === 5
-  //     ? pathname === "/home"
-  //     : R.slice(0, 6, pathname) === "/home/";
-
-  // const isTodo = (pathname.length === 5)
-  //   ? pathname === '/todo'
-  //   : R.slice(0, 6, pathname) === '/todo/';
-
-  // const isSettings =
-  //   pathname.length === 9
-  //     ? pathname === "/settings"
-  //     : R.slice(0, 10, pathname) === "/settings/";
-
-  // const isS = (pathname.length === 5)
-  //   ? pathname === '/todo'
-  //   : R.slice(0, 6, pathname) === '/todo/';
   return (
-    <Ul open={open} style={{ cursor: `${!user ? "not-allowed" : "pointer"}` }}>
-      <li
-        // className={`${isStickies ? "active" : ""}`}
-        onClick={() => dispatch(push(auth ? "/stickies" : "/"))}>
-        Stickies
-      </li>
-
-      <li
-        // className={`${isStickies ? "active" : ""}`}
-        onClick={() => dispatch(push(auth ? "/stock" : "/"))}>
-        Stock
-      </li>
-
-      <li
-        // className={`${isStickies ? "active" : ""}`}
-        onClick={() => dispatch(push(auth ? "/weather" : "/"))}>
-        Weather
-      </li>
-
-      <li
-        // className={`${isStickies ? "active" : ""}`}
-        onClick={() => dispatch(push(auth ? "/news" : "/"))}>
-        News
-      </li>
-
-      <li
-        // className={`${isStickies ? "active" : ""}`}
-        onClick={() => dispatch(push(auth ? "/calendar" : "/"))}>
-        Calendar
-      </li>
-
-      <li
-        // className={`${isStickies ? "active" : ""}`}
-        onClick={() => dispatch(push("/"))}>
-        Home
-      </li>
-      {/*
-      <li
-        // className={`${display === "cases" && user ? "active" : ""} ${
-        //   !user ? "disabled-link" : ""
-        // }`}
-        onClick={() => {
-          // move("cases");
-          setOpen(!open);
-        }}
-      >
-        Cases
-      </li>
-      <li
-        // className={`${display === "payments" && user ? "active" : ""} ${
-        //   !user ? "disabled-link" : ""
-        // }`}
-        onClick={() => {
-          // move("payments");
-          setOpen(!open);
-        }}
-      >
-        Payments
-      </li> */}
+    <Ul open={open}>
       {!auth && (
         <>
           <a
@@ -149,7 +73,8 @@ export default function RightNav({ open, setOpen, pathname }) {
             onClick={() => {
               dispatch(push("/login"));
               setOpen(!open);
-            }}>
+            }}
+          >
             Login
           </a>
           <a
@@ -157,18 +82,62 @@ export default function RightNav({ open, setOpen, pathname }) {
             onClick={() => {
               dispatch(push("/register"));
               setOpen(!open);
-            }}>
+            }}
+          >
             Sign Up
           </a>
         </>
       )}
       {auth && (
-        <a
-          onClick={logout}
-          onKeyPress={logout}
-          className="button is-info is-light">
-          Log out
-        </a>
+        <>
+          <li
+            className={`${pathname === "/" ? "active" : ""}`}
+            onClick={() => dispatch(push("/"))}
+          >
+            Home
+          </li>
+          <li
+            className={`${pathname === "/stickies" ? "active" : ""}`}
+            onClick={() => dispatch(push(auth ? "/stickies" : "/"))}
+          >
+            Stickies
+          </li>
+
+          <li
+            className={`${pathname === "/stocks" ? "active" : ""}`}
+            onClick={() => dispatch(push(auth ? "/stocks" : "/"))}
+          >
+            Stocks
+          </li>
+
+          <li
+            className={`${pathname === "/weather" ? "active" : ""}`}
+            onClick={() => dispatch(push(auth ? "/weather" : "/"))}
+          >
+            Weather
+          </li>
+
+          <li
+            className={`${pathname === "/news" ? "active" : ""}`}
+            onClick={() => dispatch(push(auth ? "/news" : "/"))}
+          >
+            News
+          </li>
+
+          <li
+            className={`${pathname === "/calendar" ? "active" : ""}`}
+            onClick={() => dispatch(push(auth ? "/calendar" : "/"))}
+          >
+            Calendar
+          </li>
+          <a
+            onClick={logout}
+            onKeyPress={logout}
+            className="button is-info is-light"
+          >
+            Log out
+          </a>
+        </>
       )}
     </Ul>
   );

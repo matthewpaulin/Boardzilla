@@ -46,7 +46,7 @@ function App({ location }) {
             <Route path="/register" component={Register} />
             <Route path="/stickies" component={Stickies} />
             <Route path="/weather" component={WeatherPage} />
-            <Route path="/stock" component={StockPage} />
+            <Route path="/stocks" component={StockPage} />
             <Route path="/news" component={NewsPage} />
             <Route path="/calendar" component={Cal} />
             <Route path="*" component={LostPage} />

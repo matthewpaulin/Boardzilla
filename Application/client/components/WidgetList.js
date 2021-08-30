@@ -21,20 +21,13 @@ import { attemptGetStocks, attemptUpdateStockLayout } from "_thunks/stocks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { faSave } from "@fortawesome/free-solid-svg-icons/faSave";
-import AddStickyModal from "_widgets/StickyNotes/AddStickyModal";
-import AddNewsModal from "_widgets/News/AddNewsModal";
-import AddStockModal from "_widgets/Stock/AddStockModal";
-import AddWeatherModal from "_widgets/Weather/AddWeatherModal";
-
+import AddWidgetModal from "_widgets/AddWidgetModal";
 export const WidgetList = () => {
   const [layouts, setLayouts] = useState([]);
   const [widgetCounter, setWidgetCounter] = useState(0);
   const [newWidgetType, setNewWidgetType] = useState("Sticky");
-  const [addStickyWidget, setAddStickyWidget] = useState(false);
-  const [addNewsWidget, setAddNewsWidget] = useState(false);
-  const [addStockWidget, setAddStockWidget] = useState(false);
-  const [addWeatherWidget, setAddWeatherWidget] = useState(false);
-  const [addCalendar, setAddCalendarWidget] = useState(false);
+  const [addWidget, setAddWidget] = useState(false);
+
   const dispatch = useDispatch();
   const { user } = useSelector(R.pick(["user"]));
   const [loading, setLoading] = useState(true);
@@ -190,7 +183,6 @@ export const WidgetList = () => {
         setAllLayouts();
         setLoading(false);
       });
-      // dispatch(attemptGetStocks()).then(() => {console.log(stocks); setAllLayouts(); setLoading(false); });
     }
   }, []);
 
@@ -200,7 +192,6 @@ export const WidgetList = () => {
 
   const onLayoutChange = useCallback((layout) => {
     let differentLayout = layout.filter((newLayout, index) => {
-      //console.log(newLayout);
       if (
         layouts[index].x !== newLayout.x ||
         layouts[index].y !== newLayout.y ||
@@ -212,7 +203,6 @@ export const WidgetList = () => {
     });
 
     var updated = 0;
-    console.log(differentLayout);
     const newArray = Array.from(difference);
     differentLayout.map((newDifferentLayout) => {
       var foundLayout = 0;
@@ -243,27 +233,11 @@ export const WidgetList = () => {
   });
 
   const add = useCallback(() => {
-    switch (newWidgetType) {
-      case "Sticky":
-        setAddStickyWidget(true);
-        break;
-      case "News":
-        setAddNewsWidget(true);
-        break;
-      case "Stock":
-        setAddStockWidget(true);
-        break;
-      case "Weather":
-        setAddWeatherWidget(true);
-        break;
-      default:
-        return;
-    }
+    setAddWidget(true);
   });
 
   const save = useCallback(() => {
     difference.map((newLayout) => {
-      console.log(newLayout);
       if (stickies.filter((sticky) => newLayout.i == sticky.id).length == 1) {
         dispatch(
           attemptUpdateStickyLayout(
@@ -328,15 +302,17 @@ export const WidgetList = () => {
     setAddStockWidget(false);
     setAddNewsWidget(false);
     setAddWeatherWidget(false);
+
+    setAddWidget(false);
   });
 
   const widgetCount = useCallback(() => {
     setWidgetCounter((prevState) => prevState + 1);
   });
 
-  const widgetCountStock = useCallback(() => {
-    setWidgetCounter((prevState) => prevState + 2);
-  });
+  // const widgetCountStock = useCallback(() => {
+  //   setWidgetCounter((prevState) => prevState + 2);
+  // });
 
   const updateList = useCallback(() => {
     setAdded(!added);
@@ -353,116 +329,61 @@ export const WidgetList = () => {
   return (
     !loading && (
       <>
-        <AddStickyModal
-          open={addStickyWidget}
+        <AddWidgetModal
+          open={addWidget}
           closeModal={closeModal}
           widgetCount={widgetCount}
           x={(widgetCounter * 4) % 12}
           y={Math.floor((widgetCounter * 4) / 12)}
           updateList={updateList}
+          widgetType={newWidgetType}
         />
+        <div className="px-5 is-flex is-align-items-center is-justify-content-space-between is-flex-wrap-wrap">
+          {/* <!-- Left side --> */}
+          <div className="mr-2 mb-2">
+            <p
+              className={"has-text-weight-semibold is-size-4"}
+            >{`${user.username}'s Widgets`}</p>
+          </div>
 
-        <AddNewsModal
-          open={addNewsWidget}
-          closeModal={closeModal}
-          widgetCount={widgetCountStock}
-          x={(widgetCounter * 4) % 12}
-          y={Math.floor((widgetCounter * 4) / 12)}
-          updateList={updateList}
-        />
-
-        <AddStockModal
-          open={addStockWidget}
-          closeModal={closeModal}
-          widgetCount={widgetCountStock}
-          x={(widgetCounter * 4) % 12}
-          y={Math.floor((widgetCounter * 4) / 12)}
-          updateList={updateList}
-        />
-
-        <AddWeatherModal
-          open={addWeatherWidget}
-          closeModal={closeModal}
-          widgetCount={widgetCount}
-          x={(widgetCounter * 4) % 12}
-          y={Math.floor((widgetCounter * 4) / 12)}
-          updateList={updateList}
-        />
-        <div
-          style={{
-            width: `100%`,
-            height: `50px`,
-          }}>
-          {/* <!-- Main container --> */}
-          <div className="level px-5">
-            {/* <!-- Left side --> 
-    use these links to filter only a specific type of widget
-  
-  */}
-            <div className="level-left">
-              {/* <p className="level-item">
-                <strong>
-                  <a>All</a>
-                </strong>
-              </p>
-              <p className="level-item">
-                <a>Stickies</a>
-              </p>
-              <p className="level-item">
-                <a>News</a>
-              </p>
-              <p className="level-item">
-                <a>Weather</a>
-              </p>
-              <p className="level-item">
-                <a>Stocks</a>
-              </p>
-              <p className="level-item">
-                <a>Calendars</a>
-              </p> */}
-              <p
-                className={
-                  "has-text-weight-semibold"
-                }>{`${user.username}'s Widgets`}</p>
-            </div>
-
-            {/* <!-- Right side --> */}
-            <div className="level-right">
-              <div className="control mr-2">
-                <div className="select">
-                  <select onChange={selectType} value={newWidgetType}>
-                    <option value="Sticky">Sticky</option>
-                    <option value="News">News</option>
-                    <option value="Weather">Weather</option>
-                    <option value="Stock">Stock</option>
-                  </select>
-                </div>
+          {/* <!-- Right side --> */}
+          <div className="is-flex is-align-items-center mb-2">
+            <div className="control mr-2">
+              <div className="select">
+                <select onChange={selectType} value={newWidgetType}>
+                  <option value="Sticky">Sticky</option>
+                  <option value="News">News</option>
+                  <option value="Weather">Weather</option>
+                  <option value="Stock">Stock</option>
+                </select>
               </div>
-
-              <p className="level-item">
-                <button className="button is-link is-rounded" onClick={add}>
-                  <span className="icon">
-                    <FontAwesomeIcon icon={faPlus} />
-                  </span>
-                </button>
-              </p>
-              <p className="level-item">
-                <button
-                  className="button is-link is-rounded"
-                  onClick={save}
-                  disabled={disabled}>
-                  <span className="icon">
-                    <FontAwesomeIcon icon={faSave} />
-                  </span>
-                </button>
-              </p>
             </div>
+
+            <p className="mr-2">
+              <button className="button is-link" onClick={add}>
+                <span className="icon">
+                  <FontAwesomeIcon icon={faPlus} />
+                </span>
+              </button>
+            </p>
+            <p>
+              <button
+                className="button is-link"
+                onClick={save}
+                disabled={disabled}
+              >
+                <span className="icon">
+                  <FontAwesomeIcon icon={faSave} />
+                </span>
+              </button>
+            </p>
           </div>
         </div>
 
         <ResponsiveReactGridLayout
           className="layout"
-          onLayoutChange={onLayoutChange}>
+          onLayoutChange={onLayoutChange}
+        >
           {layouts.map((widgetLayout) => {
             const sticky = stickies.filter(
               (sticky) => sticky.id == widgetLayout.i
@@ -474,15 +395,14 @@ export const WidgetList = () => {
             const newWeather = weather.filter(
               (New) => New.id == widgetLayout.i
             )[0];
-            //console.log(stock);
-            //console.log(sticky || stock);
             return (
               <div
                 style={{
                   height: `100%`,
                 }}
                 key={widgetLayout.i}
-                data-grid={widgetLayout}>
+                data-grid={widgetLayout}
+              >
                 {widgetLayout.i === user.id && <Cal key={user.id} />}
                 {sticky && (
                   <Sticky key={sticky.id} remove={remove} {...sticky} />

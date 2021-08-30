@@ -18,12 +18,16 @@ export default function Dasboard() {
     if (R.isEmpty(user)) {
       dispatch(push("/login"));
     } else {
-      // dispatch(attemptGetStickies()).then(() => setLoading(false));
       const stickyWidgets = dispatch(attemptGetStickies());
       const stocksWidgets = dispatch(attemptGetStocks());
       const newsWidgets = dispatch(attemptGetNews());
       const weatherWidgets = dispatch(attemptGetWeather());
-      Promise.allSettled([stickyWidgets, stocksWidgets, newsWidgets, weatherWidgets]).then(() => setLoading(false));
+      Promise.allSettled([
+        stickyWidgets,
+        stocksWidgets,
+        newsWidgets,
+        weatherWidgets,
+      ]).then(() => setLoading(false));
     }
   }, []);
 

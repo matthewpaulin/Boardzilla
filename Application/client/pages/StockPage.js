@@ -24,11 +24,17 @@ export const StockPage = () => {
     !loading && (
       <div>
         <>
-          <ul className="sticky-list">
-            {stocks.map((widget) => (
-              <Stock key={widget.id} {...widget} remove={() => {}} />
-            ))}
-          </ul>
+          {(stocks.length && (
+            <ul className="sticky-list">
+              {stocks.map((widget) => (
+                <Stock key={widget.id} {...widget} remove={() => {}} />
+              ))}
+            </ul>
+          )) || (
+            <div className="is-size-3 has-text-centered m-3">
+              You don't currently have any stock widgets.
+            </div>
+          )}
         </>
       </div>
     )

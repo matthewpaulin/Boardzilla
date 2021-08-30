@@ -17,8 +17,8 @@ router.get("/", requireAuth, (req, res) => {
 
 router.post("/", requireAuth, (req, res) => {
   req.body.user = req.user.id;
-  req.body.width = req.body.width || 4;
-  req.body.height = req.body.height || 2;
+  req.body.width = req.body.width || 1;
+  req.body.height = req.body.height || 1;
   req.body.x = req.body.x || 0;
   req.body.y = req.body.y || 0;
   req.body.text = req.body.text || "";

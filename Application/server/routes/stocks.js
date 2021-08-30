@@ -104,8 +104,8 @@ router.post("/", requireAuth, (req, res) => {
       .then((res) => res.json())
       .then((json) => {
         req.body.user = req.user.id;
-        req.body.width = req.body.width || 8;
-        req.body.height = req.body.height || 4;
+        req.body.width = req.body.width || 1;
+        req.body.height = req.body.height || 1;
         req.body.x = req.body.x || 0;
         req.body.y = req.body.y || 0;
 
