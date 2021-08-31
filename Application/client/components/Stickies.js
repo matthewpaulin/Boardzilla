@@ -23,12 +23,20 @@ export const Stickies = () => {
     !loading && (
       <div>
         <>
-          {/* <AddSticky /> */}
-          <ul className="sticky-list">
-            {stickies.map((sticky) => (
-              <Sticky key={sticky.id} {...sticky} remove={() => {}} />
-            ))}
-          </ul>
+          {(stickies && stickies.length && (
+            <ul className="sticky-list container">
+              {stickies.map((sticky) => (
+                <li key={sticky.id}>
+                  <Sticky {...sticky} remove={() => {}} />
+                  <hr />
+                </li>
+              ))}
+            </ul>
+          )) || (
+            <div className="is-size-3 has-text-centered m-3">
+              You don't currently have any stickies.
+            </div>
+          )}
         </>
       </div>
     )

@@ -24,11 +24,20 @@ export const NewsPage = () => {
     !loading && (
       <div>
         <>
-          <ul className="sticky-list">
-            {news.map((widget) => (
-              <News key={widget.id} {...widget} remove={() => {}} />
-            ))}
-          </ul>
+          {(news && news.length && (
+            <ul className="sticky-list container">
+              {news.map((widget) => (
+                <li key={widget.id}>
+                  <News {...widget} remove={() => {}} />
+                  <hr />
+                </li>
+              ))}
+            </ul>
+          )) || (
+            <div className="is-size-3 has-text-centered m-3">
+              You don't currently have any news widgets.
+            </div>
+          )}
         </>
       </div>
     )

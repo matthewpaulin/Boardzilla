@@ -190,7 +190,6 @@ export const WidgetList = () => {
   }, [layouts]);
 
   const onLayoutChange = useCallback((layout) => {
-    console.log(layout);
     let differentLayout = layout.filter((newLayout, index) => {
       if (
         layouts[index].x !== newLayout.x ||

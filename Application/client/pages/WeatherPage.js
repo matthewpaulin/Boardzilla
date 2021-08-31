@@ -24,11 +24,20 @@ export const WeatherPage = () => {
     !loading && (
       <div>
         <>
-          <ul className="sticky-list">
-            {weather.map((widget) => (
-              <Weather key={widget.id} {...widget} remove={() => {}} />
-            ))}
-          </ul>
+          {(weather && weather.length && (
+            <ul className="sticky-list container">
+              {weather.map((widget) => (
+                <li key={widget.id}>
+                  <Weather {...widget} remove={() => {}} />
+                  <hr />
+                </li>
+              ))}
+            </ul>
+          )) || (
+            <div className="is-size-3 has-text-centered m-3">
+              You don't currently have any weather widgets.
+            </div>
+          )}
         </>
       </div>
     )

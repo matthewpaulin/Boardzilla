@@ -24,10 +24,13 @@ export const StockPage = () => {
     !loading && (
       <div>
         <>
-          {(stocks.length && (
-            <ul className="sticky-list">
+          {(stocks && stocks.length && (
+            <ul className="sticky-list container">
               {stocks.map((widget) => (
-                <Stock key={widget.id} {...widget} remove={() => {}} />
+                <li key={widget.id}>
+                  <Stock {...widget} remove={() => {}} />
+                  <hr />
+                </li>
               ))}
             </ul>
           )) || (

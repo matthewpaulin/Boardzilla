@@ -9,7 +9,7 @@ import { attemptGetNews } from "_thunks/news";
 import { attemptGetWeather } from "_thunks/weather";
 import WidgetList from "_components/WidgetList";
 
-export default function Dasboard() {
+export default function Dashboard() {
   const dispatch = useDispatch();
   const { user } = useSelector(R.pick(["user"]));
   const [loading, setLoading] = useState(true);
