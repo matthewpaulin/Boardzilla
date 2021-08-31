@@ -13,7 +13,6 @@ export default function AddWidgetModal({
   updateList,
   widgetType,
 }) {
-  console.log(widgetType);
   return (
     <div className={`modal confirm-modal ${open ? "is-active" : ""}`}>
       <div className="modal-background" />

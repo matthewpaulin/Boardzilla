@@ -34,7 +34,6 @@ router.get("/", requireAuth, (req, res) => {
                         .status(400)
                         .send({ message: "get news widget failed", err });
                     } else {
-                      console.log("new news");
                     }
                   });
                 })
@@ -46,7 +45,6 @@ router.get("/", requireAuth, (req, res) => {
             }
           });
         } else {
-          console.log("old news");
         }
       });
       res.send({ message: "news retrieved successfully", news });
@@ -66,8 +64,8 @@ router.post("/", requireAuth, (req, res) => {
       .then((res) => res.json())
       .then((json) => {
         req.body.user = req.user.id;
-        req.body.width = req.body.width || 1;
-        req.body.height = req.body.height || 1;
+        req.body.width = req.body.width || 3;
+        req.body.height = req.body.height || 2;
         req.body.x = req.body.x || 0;
         req.body.y = req.body.y || 0;
         req.body.topic = req.body.topic || "";
@@ -102,7 +100,6 @@ router.put("/", requireAuth, (req, res) => {
       if (!req.body.topic)
         res.status(400).send({ message: "Update widget failed", err });
       else {
-        console.log("updating news with topic ", req.body.topic);
         fetch(
           `https://newsapi.org/v2/everything?q=${req.body.topic}&apiKey=${process.env.NEWS_KEY}`
         )

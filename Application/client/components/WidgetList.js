@@ -9,7 +9,6 @@ import Stock from "_widgets/Stock/Stock";
 import News from "_widgets/News/News";
 import Weather from "_widgets/Weather/Weather";
 import Cal from "_pages/Cal";
-import { attemptGetEvents } from "_thunks/events";
 import { attemptUpdateCalendarLayout } from "_thunks/user";
 import { attemptGetWeather, attemptUpdateWeatherLayout } from "_thunks/weather";
 import { attemptGetNews, attemptUpdateNewsLayout } from "_thunks/news";
@@ -87,8 +86,8 @@ export const WidgetList = () => {
         y: news.y, // puts it at the bottom
         w: news.width,
         h: news.height,
-        minH: 6,
-        minW: 6,
+        minH: 2,
+        minW: 3,
       };
 
       allLayouts.push(newWidget);
@@ -118,8 +117,8 @@ export const WidgetList = () => {
         y: stickies[stickies.length - 1].y, // puts it at the bottom
         w: stickies[stickies.length - 1].width,
         h: stickies[stickies.length - 1].height,
-        minH: 2,
-        minW: 4,
+        minH: 1,
+        minW: 2,
       };
       const allLayouts = Array.from(layouts);
       allLayouts.push(newWidget);
@@ -131,8 +130,8 @@ export const WidgetList = () => {
         y: stocks[stocks.length - 1].y, // puts it at the bottom
         w: stocks[stocks.length - 1].width,
         h: stocks[stocks.length - 1].height,
-        minH: 4,
-        minW: 8,
+        minH: 2,
+        minW: 3,
       };
       const allLayouts = Array.from(layouts);
       allLayouts.push(newWidget);
@@ -144,8 +143,8 @@ export const WidgetList = () => {
         y: news[news.length - 1].y, // puts it at the bottom
         w: news[news.length - 1].width,
         h: news[news.length - 1].height,
-        minH: 6,
-        minW: 8,
+        minH: 2,
+        minW: 3,
       };
       const allLayouts = Array.from(layouts);
       allLayouts.push(newWidget);
@@ -157,8 +156,8 @@ export const WidgetList = () => {
         y: weather[weather.length - 1].y, // puts it at the bottom
         w: weather[weather.length - 1].width,
         h: weather[weather.length - 1].height,
-        minH: 4,
-        minW: 8,
+        minH: 2,
+        minW: 3,
       };
       const allLayouts = Array.from(layouts);
       allLayouts.push(newWidget);
@@ -191,6 +190,7 @@ export const WidgetList = () => {
   }, [layouts]);
 
   const onLayoutChange = useCallback((layout) => {
+    console.log(layout);
     let differentLayout = layout.filter((newLayout, index) => {
       if (
         layouts[index].x !== newLayout.x ||
@@ -304,10 +304,6 @@ export const WidgetList = () => {
   const widgetCount = useCallback(() => {
     setWidgetCounter((prevState) => prevState + 1);
   });
-
-  // const widgetCountStock = useCallback(() => {
-  //   setWidgetCounter((prevState) => prevState + 2);
-  // });
 
   const updateList = useCallback(() => {
     setAdded(!added);

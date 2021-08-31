@@ -90,8 +90,6 @@ router.get("/", requireAuth, (req, res) => {
                       res
                         .status(400)
                         .send({ message: "get weather widget failed", err });
-                    } else {
-                      console.log("new weather");
                     }
                   });
                 })
@@ -102,8 +100,6 @@ router.get("/", requireAuth, (req, res) => {
                 });
             }
           });
-        } else {
-          console.log("old weather");
         }
       });
       res.send({ message: "weather retrieved successfully", widgets });
@@ -122,8 +118,8 @@ router.post("/", requireAuth, (req, res) => {
     req.body.country = req.body.country || "";
 
     req.body.user = req.user.id;
-    req.body.width = req.body.width || 1;
-    req.body.height = req.body.height || 1;
+    req.body.width = req.body.width || 3;
+    req.body.height = req.body.height || 2;
     req.body.x = req.body.x || 0;
     req.body.y = req.body.y || 0;
     req.body.lastUpdated = new Date();
@@ -207,7 +203,6 @@ router.post("/", requireAuth, (req, res) => {
         const widget = Weather(newWeather);
         widget.save((err, savedWeather) => {
           if (err) {
-            console.log("error here");
             res
               .status(400)
               .send({ message: "Create weather widget failed", err });
@@ -233,7 +228,6 @@ router.put("/", requireAuth, (req, res) => {
       if (!req.body.city)
         res.status(400).send({ message: "Update widget failed", err });
       else {
-        console.log("updating weather with city ", req.body.city);
         req.body.state = req.body.state || "";
         req.body.country = req.body.country || "";
         let place = encodeURIComponent(
@@ -254,7 +248,6 @@ router.put("/", requireAuth, (req, res) => {
           })
           .then((res) => res.json())
           .then((json) => {
-            console.log(json);
             //db
             widget.timeOffset = json.timezone_offset;
             widget.current = {

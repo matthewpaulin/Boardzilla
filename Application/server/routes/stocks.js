@@ -71,7 +71,6 @@ router.get("/", requireAuth, (req, res) => {
                         .status(400)
                         .send({ message: "get stock widget failed", err });
                     } else {
-                      console.log("new stock");
                     }
                   });
                 })
@@ -82,8 +81,6 @@ router.get("/", requireAuth, (req, res) => {
                 });
             }
           });
-        } else {
-          console.log("old stock");
         }
       });
       res.send({ message: "stock retrieved successfully", stocks });
@@ -104,9 +101,8 @@ router.post("/", requireAuth, (req, res) => {
       .then((res) => res.json())
       .then((json) => {
         req.body.user = req.user.id;
-        //if (req.body.width && req.body.width)
-        req.body.width = req.body.width || 1;
-        req.body.height = req.body.height || 1;
+        req.body.width = req.body.width || 3;
+        req.body.height = req.body.height || 2;
         req.body.x = req.body.x || 0;
         req.body.y = req.body.y || 0;
 
@@ -155,7 +151,6 @@ router.post("/", requireAuth, (req, res) => {
 
         newStock.save((err, savedStock) => {
           if (err) {
-            console.log("error here");
             res
               .status(400)
               .send({ message: "Create stock widget failed", err });
@@ -181,7 +176,6 @@ router.put("/", requireAuth, (req, res) => {
       if (!req.body.symbol || req.body.symbol === widget.symbol)
         res.status(400).send({ message: "Update widget failed", err });
       else {
-        console.log("updating stock with symbol ", req.body.symbol);
         fetch(
           `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${req.body.symbol}&apikey=${process.env.STOCK_KEY}`
         )

@@ -68,7 +68,7 @@ export const Stock = ({ id, dailyData, symbol, remove }) => {
               },
               title: {
                 text: symbol,
-                align: "center",
+                align: "left",
               },
               xaxis: {
                 type: "datetime",

@@ -99,11 +99,11 @@ export const Weather = ({
           </div>
         )}
       </div>
-      <div className="card-footer level py-2">
-        <div className="level-left">
+      <div className="card-footer widget-footer py-2">
+        <div className="left">
           {edit && (
             <>
-              <div className="level-item">
+              <div>
                 <div className="field">
                   <p className="control">
                     <input
@@ -117,7 +117,7 @@ export const Weather = ({
                 </div>
               </div>
 
-              <div className="level-item">
+              <div>
                 <div className="field">
                   <p className="control">
                     <input
@@ -131,7 +131,7 @@ export const Weather = ({
                 </div>
               </div>
 
-              <div className="level-item">
+              <div>
                 <div className="field">
                   <p className="control">
                     <input
@@ -147,10 +147,10 @@ export const Weather = ({
             </>
           )}
         </div>
-        <div className="level-right">
+        <div className="right">
           {edit ? (
             <>
-              <p className="level-item">
+              <p>
                 <button
                   className="button is-success"
                   onClick={handleUpdateWeather}
@@ -160,7 +160,7 @@ export const Weather = ({
                   </span>
                 </button>
               </p>
-              <p className="level-item">
+              <p>
                 <button
                   className="button is-warning has-text-centered"
                   onClick={cancelEdit}
@@ -172,7 +172,7 @@ export const Weather = ({
               </p>
             </>
           ) : (
-            <p className="level-item">
+            <p>
               <button
                 className="button is-dark has-text-centered"
                 onClick={() => setEdit(true)}
@@ -183,7 +183,7 @@ export const Weather = ({
               </button>
             </p>
           )}
-          <p className="level-item">
+          <p>
             <button
               className="button is-danger is-outlined has-text-centered"
               onClick={openModal}
