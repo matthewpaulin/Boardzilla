@@ -54,10 +54,7 @@ export const Cal = () => {
 
   return (
     !loading && (
-      <div
-        className="card mb-3 px-2 py-2 height-100"
-        style={{ overflow: "auto" }}
-      >
+      <div className="card px-2 py-2 height-100" style={{ overflow: "auto" }}>
         <div className="content has-text-centered">
           <div className="calendar mb-2">
             <div className="calendar__container">

@@ -46,11 +46,11 @@ export const WidgetList = () => {
         i: user.id,
         x: user.calendarPos.x || 0,
         y: user.calendarPos.y || 0,
-        w: user.calendarPos.width || 4,
-        h: user.calendarPos.height || 6,
-        minH: 6,
-        minW: 4,
-      }) || { i: user.id, x: 0, y: 0, w: 4, h: 6, minH: 6, minW: 4 }
+        h: user.calendarPos.height || 4,
+        w: user.calendarPos.width || 3,
+        minH: 3,
+        minW: 3,
+      }) || { i: user.id, x: 0, y: 0, h: 4, w: 3, minH: 3, minW: 3 }
     );
 
     stickies.map((sticky) => {
@@ -60,8 +60,8 @@ export const WidgetList = () => {
         y: sticky.y, // puts it at the bottom
         w: sticky.width,
         h: sticky.height,
-        minH: 2,
-        minW: 4,
+        minH: 1,
+        minW: 2,
       };
 
       allLayouts.push(newWidget);
@@ -74,8 +74,8 @@ export const WidgetList = () => {
         y: stock.y, // puts it at the bottom
         w: stock.width,
         h: stock.height,
-        minH: 4,
-        minW: 8,
+        minH: 2,
+        minW: 3,
       };
 
       allLayouts.push(newWidget);
@@ -88,7 +88,7 @@ export const WidgetList = () => {
         w: news.width,
         h: news.height,
         minH: 6,
-        minW: 8,
+        minW: 6,
       };
 
       allLayouts.push(newWidget);
@@ -101,8 +101,8 @@ export const WidgetList = () => {
         y: weather.y, // puts it at the bottom
         w: weather.width,
         h: weather.height,
-        minH: 4,
-        minW: 8,
+        minH: 2,
+        minW: 3,
       };
 
       allLayouts.push(newWidget);
@@ -298,11 +298,6 @@ export const WidgetList = () => {
     setDisabled(true);
   });
   const closeModal = useCallback(() => {
-    setAddStickyWidget(false);
-    setAddStockWidget(false);
-    setAddNewsWidget(false);
-    setAddWeatherWidget(false);
-
     setAddWidget(false);
   });
 

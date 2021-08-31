@@ -53,8 +53,8 @@ export const Weather = ({
   };
 
   return place ? (
-    <div className={`card mb-3 px-2 height-100`}>
-      <div className={`height-calc4`}>
+    <div className={`card px-2 height-100`}>
+      <div>
         <p className="is-size-3 has-text-weight-bold has-text-centered">
           {place || "place"}
         </p>
@@ -64,21 +64,25 @@ export const Weather = ({
         {weatherScreen === "daily" && <DailyWeather daily={daily} />}
         <div
           className="tabs is-centered is-toggle"
-          style={{ overflowY: "hidden", overflowX: "hidden" }}>
+          style={{ overflowY: "hidden", overflowX: "hidden" }}
+        >
           <ul>
             <li
               className={weatherScreen === "current" ? "is-active" : ""}
-              onClick={() => setWeatherScreen("current")}>
+              onClick={() => setWeatherScreen("current")}
+            >
               <a>Current</a>
             </li>
             <li
               className={weatherScreen === "hourly" ? "is-active" : ""}
-              onClick={() => setWeatherScreen("hourly")}>
+              onClick={() => setWeatherScreen("hourly")}
+            >
               <a>Hourly</a>
             </li>
             <li
               className={weatherScreen === "daily" ? "is-active" : ""}
-              onClick={() => setWeatherScreen("daily")}>
+              onClick={() => setWeatherScreen("daily")}
+            >
               <a>Daily</a>
             </li>
           </ul>
@@ -149,7 +153,8 @@ export const Weather = ({
               <p className="level-item">
                 <button
                   className="button is-success"
-                  onClick={handleUpdateWeather}>
+                  onClick={handleUpdateWeather}
+                >
                   <span className="icon is-small">
                     <FontAwesomeIcon icon={faSave} />
                   </span>
@@ -158,7 +163,8 @@ export const Weather = ({
               <p className="level-item">
                 <button
                   className="button is-warning has-text-centered"
-                  onClick={cancelEdit}>
+                  onClick={cancelEdit}
+                >
                   <span className="icon is-small">
                     <FontAwesomeIcon icon={faBan} />
                   </span>
@@ -169,7 +175,8 @@ export const Weather = ({
             <p className="level-item">
               <button
                 className="button is-dark has-text-centered"
-                onClick={() => setEdit(true)}>
+                onClick={() => setEdit(true)}
+              >
                 <span className="icon is-small">
                   <FontAwesomeIcon icon={faPencilAlt} />
                 </span>
@@ -179,7 +186,8 @@ export const Weather = ({
           <p className="level-item">
             <button
               className="button is-danger is-outlined has-text-centered"
-              onClick={openModal}>
+              onClick={openModal}
+            >
               <span className="icon is-small">
                 <FontAwesomeIcon icon={faTimes} />
               </span>

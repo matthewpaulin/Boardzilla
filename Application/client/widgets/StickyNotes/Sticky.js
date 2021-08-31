@@ -49,9 +49,9 @@ export default function Sticky({ id, text, color, textColor, remove }) {
   const updateColor = (e) => setCurrentColor(e.target.value);
   const updateTextColor = (e) => setCurrentTextColor(e.target.value);
   return (
-    <div className={`card mb-3 height-100`}>
+    <div className={`card height-100`}>
       <div
-        className="card-content height-calc"
+        className="card-content"
         style={{ backgroundColor: currentColor, color: currentTextColor }}
       >
         <div className="content">
@@ -63,7 +63,7 @@ export default function Sticky({ id, text, color, textColor, remove }) {
                 onChange={updateText}
               />
 
-              <div className="field is-grouped is-grouped-centered mt-2">
+              <div className="field is-grouped is-grouped-centered mt-2 is-flex-wrap-wrap">
                 <label
                   className="label has-background-light p-2"
                   style={{ marginBottom: 0 }}

@@ -30,7 +30,10 @@ export const Stock = ({ id, dailyData, symbol, remove }) => {
     setEdit(false);
     setCurrentSymbol(symbol);
   };
-  const deleteStock = () =>  {remove(id);dispatch(attemptDeleteStock(id))};
+  const deleteStock = () => {
+    remove(id);
+    dispatch(attemptDeleteStock(id));
+  };
   const handleUpdateStock = () => {
     if (currentSymbol && currentSymbol !== symbol) {
       dispatch(attemptUpdateStock(id, currentSymbol)).then(() =>
@@ -40,86 +43,54 @@ export const Stock = ({ id, dailyData, symbol, remove }) => {
   };
 
   return dailyData && dailyData.dateTime && dailyData.dateTime.length > 1 ? (
-    <div className={`card mb-3 px-2 height-100`}>
-      <div className="content has-text-centered height-calc2">
-        <Chart
-          series={[
-            {
-              data: dailyData.dateTime.map((x, i) => [
-                x,
-                [
-                  dailyData.open[i],
-                  dailyData.high[i],
-                  dailyData.low[i],
-                  dailyData.close[i],
-                ],
-              ]),
-            },
-          ]}
-          width={"100%"}
-          height={"90%"}
-          options={{
-            chart: {
-              type: "candlestick",
-            },
-            title: {
-              text: symbol,
-              align: "center",
-            },
-            xaxis: {
-              type: "datetime",
-            },
-            yaxis: {
-              tooltip: {
-                enabled: true,
+    <div className={`card px-2 height-100`}>
+      <div className="card-content has-text-centered">
+        <div className="">
+          <Chart
+            series={[
+              {
+                data: dailyData.dateTime.map((x, i) => [
+                  x,
+                  [
+                    dailyData.open[i],
+                    dailyData.high[i],
+                    dailyData.low[i],
+                    dailyData.close[i],
+                  ],
+                ]),
               },
-            },
-            candlestick: {
-              colors: {
-                upward: "#00b16a",
-                downward: "#f03434",
+            ]}
+            width={"100%"}
+            height={"auto"}
+            options={{
+              chart: {
+                type: "candlestick",
               },
-              wick: {
-                useFillColor: true,
+              title: {
+                text: symbol,
+                align: "center",
               },
-            },
-          }}
-          type="candlestick"
-        />
-
-        {/* <Plot
-          data={[
-            {
-              x: dailyData.dateTime,
-              open: dailyData.open,
-              close: dailyData.close,
-              decreasing: { line: { color: "#f03434" } },
-              increasing: { line: { color: "#00b16a" } },
-              high: dailyData.high,
-              low: dailyData.low,
-              type: "candlestick",
-              xaxis: "x",
-              yaxis: "y",
-            },
-          ]}
-          layout={{
-            dragmode: "zoom",
-            showlegend: false,
-            xaxis: {
-              range: [
-                dailyData.dateTime.length > 30
-                  ? dailyData.dateTime[30]
-                  : dailyData.dateTime[dailyData.dateTime.length - 1],
-                dailyData.dateTime[0],
-              ],
-              title: "Date",
-              type: "date",
-            },
-            yaxis: {
-              autorange: true,
-            },
-          }}
-        /> */}
+              xaxis: {
+                type: "datetime",
+              },
+              yaxis: {
+                tooltip: {
+                  enabled: true,
+                },
+              },
+              candlestick: {
+                colors: {
+                  upward: "#00b16a",
+                  downward: "#f03434",
+                },
+                wick: {
+                  useFillColor: true,
+                },
+              },
+            }}
+            type="candlestick"
+          />
+        </div>
         <div className="level">
           <div className="level-item has-text-centered">
             <div>
@@ -198,7 +169,8 @@ export const Stock = ({ id, dailyData, symbol, remove }) => {
               <p className="level-item">
                 <button
                   className="button is-success"
-                  onClick={handleUpdateStock}>
+                  onClick={handleUpdateStock}
+                >
                   <span className="icon is-small">
                     <FontAwesomeIcon icon={faSave} />
                   </span>
@@ -207,7 +179,8 @@ export const Stock = ({ id, dailyData, symbol, remove }) => {
               <p className="level-item">
                 <button
                   className="button is-warning has-text-centered"
-                  onClick={cancelEdit}>
+                  onClick={cancelEdit}
+                >
                   <span className="icon is-small">
                     <FontAwesomeIcon icon={faBan} />
                   </span>
@@ -218,7 +191,8 @@ export const Stock = ({ id, dailyData, symbol, remove }) => {
             <p className="level-item">
               <button
                 className="button is-dark has-text-centered"
-                onClick={editStock}>
+                onClick={editStock}
+              >
                 <span className="icon is-small">
                   <FontAwesomeIcon icon={faPencilAlt} />
                 </span>
@@ -228,7 +202,8 @@ export const Stock = ({ id, dailyData, symbol, remove }) => {
           <p className="level-item">
             <button
               className="button is-danger is-outlined has-text-centered"
-              onClick={openModal}>
+              onClick={openModal}
+            >
               <span className="icon is-small">
                 <FontAwesomeIcon icon={faTimes} />
               </span>

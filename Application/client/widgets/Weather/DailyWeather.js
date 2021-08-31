@@ -9,14 +9,16 @@ export const DailyWeather = ({ daily }) => {
     <>
       {daily && (
         <div
-          className="table-container table is-size-4 height-calc5"
-          style={{ overflowY: "scroll" }}>
+          className="table-container table is-size-4"
+          style={{ overflowY: "scroll" }}
+        >
           <table
             className="table is-scrollable has-text-centered"
             style={{
               margin: "auto",
               whiteSpace: "nowrap",
-            }}>
+            }}
+          >
             <thead>
               <tr>
                 {daily.map((day, i) => {

@@ -4,7 +4,13 @@ import PropTypes from "prop-types";
 import { attemptAddSticky } from "_thunks/stickies";
 import useKeyPress from "_hooks/useKeyPress";
 
-export default function AddSticky({ closeModal, widgetCount, x, y, updateList}) {
+export default function AddSticky({
+  closeModal,
+  widgetCount,
+  x,
+  y,
+  updateList,
+}) {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [color, setColor] = useState("#ffffff");

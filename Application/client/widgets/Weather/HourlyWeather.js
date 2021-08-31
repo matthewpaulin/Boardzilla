@@ -6,7 +6,7 @@ export const HourlyWeather = ({ hourly }) => {
   return (
     <>
       {hourly && (
-        <div className="table-container table height-calc5" style={{ overflowY: "scroll" }} >
+        <div className="table-container table" style={{ overflowY: "scroll" }}>
           <table className="table is-scrollable" style={{ margin: "auto" }}>
             <thead>
               <tr>
@@ -18,7 +18,8 @@ export const HourlyWeather = ({ hourly }) => {
             </thead>
             <tbody
               className="is-size-4"
-              style={{ maxHeight: "50px", overflowY: "scroll" }}>
+              style={{ maxHeight: "50px", overflowY: "scroll" }}
+            >
               {hourly.map((hour, i) => {
                 return (
                   <tr key={i}>

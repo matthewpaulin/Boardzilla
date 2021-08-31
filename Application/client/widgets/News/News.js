@@ -15,7 +15,7 @@ import { attemptDeleteNews } from "_thunks/news";
 import { attemptUpdateNews } from "_thunks/news";
 import ConfirmModal from "_components/ConfirmModal";
 
-export const News = ({ id, articles, topic, remove}) => {
+export const News = ({ id, articles, topic, remove }) => {
   const dispatch = useDispatch();
 
   const [pageNumber, setPageNumber] = useState(0);
@@ -31,7 +31,10 @@ export const News = ({ id, articles, topic, remove}) => {
     setEdit(false);
     setCurrentTopic(topic);
   };
-  const deleteNews = () => {remove(id);dispatch(attemptDeleteNews(id))};
+  const deleteNews = () => {
+    remove(id);
+    dispatch(attemptDeleteNews(id));
+  };
   const handleUpdateNews = () => {
     if (currentTopic && currentTopic !== topic) {
       dispatch(attemptUpdateNews(id, currentTopic)).then(() => setEdit(false));
@@ -41,58 +44,62 @@ export const News = ({ id, articles, topic, remove}) => {
   const prev = () =>
     setPageNumber((pageNumber + articles.length - 1) % articles.length);
   return articles.length ? (
-    <div className={`card mb-3 px-2 height-100`}>
-    <div className={`height-calc3`}>
-      <div className="has-text-centered">
-        <p className="is-size-3 has-text-weight-bold p-1">
-          {articles[pageNumber].title || "Title"}
-        </p>
-      </div>
-      <div style={{margin: `auto`, maxHeight: `85%`, maxWidth: `85%`}} className="card-image">
-        <figure className="image is-16by9">
-          <img
-            src={
-              articles[pageNumber].urlToImage ||
-              "https://media2.vault.com/21223/rainy_window.jpg"
-            }
-            alt="article image"
-          />
-        </figure>
-      </div>
-      <div className="card-content">
-        <div className="media">
-          <div className="media-left">
-            <p className="subtitle is-6">
-              <span className="icon">
-                <FontAwesomeIcon icon={faUserEdit} />
-              </span>
-              {articles[pageNumber].author || "Unknown"}
-            </p>
+    <div className={`card px-2 height-100`}>
+      <div>
+        <div className="has-text-centered">
+          <p className="is-size-3 has-text-weight-bold p-1">
+            {articles[pageNumber].title || "Title"}
+          </p>
+        </div>
+        <div
+          style={{ margin: `auto`, maxHeight: `85%`, maxWidth: `85%` }}
+          className="card-image"
+        >
+          <figure className="image is-16by9">
+            <img
+              src={
+                articles[pageNumber].urlToImage ||
+                "https://media2.vault.com/21223/rainy_window.jpg"
+              }
+              alt="article image"
+            />
+          </figure>
+        </div>
+        <div className="card-content">
+          <div className="media">
+            <div className="media-left">
+              <p className="subtitle is-6">
+                <span className="icon">
+                  <FontAwesomeIcon icon={faUserEdit} />
+                </span>
+                {articles[pageNumber].author || "Unknown"}
+              </p>
+            </div>
+            <div className="media-right">
+              <p className="subtitle is-6">
+                <span className="icon">
+                  <FontAwesomeIcon icon={faLink} />
+                </span>
+                <a href={articles[pageNumber].url || "#"}>
+                  {articles[pageNumber].source.name || source}
+                </a>
+              </p>
+            </div>
           </div>
-          <div className="media-right">
-            <p className="subtitle is-6">
+          <div className="content">
+            {articles[pageNumber].description}
+            <br />
+            <time
+              dateTime={articles[pageNumber].publishedAt}
+              className="has-text-weight-light"
+            >
               <span className="icon">
-                <FontAwesomeIcon icon={faLink} />
+                <FontAwesomeIcon icon={faClock} />
               </span>
-              <a href={articles[pageNumber].url || "#"}>
-                {articles[pageNumber].source.name || source}
-              </a>
-            </p>
+              {new Date(articles[pageNumber].publishedAt).toDateString()}
+            </time>
           </div>
         </div>
-        <div className="content">
-          {articles[pageNumber].description}
-          <br />
-          <time
-            dateTime={articles[pageNumber].publishedAt}
-            className="has-text-weight-light">
-            <span className="icon">
-              <FontAwesomeIcon icon={faClock} />
-            </span>
-            {new Date(articles[pageNumber].publishedAt).toDateString()}
-          </time>
-        </div>
-      </div>
       </div>
       <div className="has-text-centered pb-2">
         <button className="button is-dark is-rounded" onClick={prev}>
@@ -141,7 +148,8 @@ export const News = ({ id, articles, topic, remove}) => {
               <p className="level-item">
                 <button
                   className="button is-success"
-                  onClick={handleUpdateNews}>
+                  onClick={handleUpdateNews}
+                >
                   <span className="icon is-small">
                     <FontAwesomeIcon icon={faSave} />
                   </span>
@@ -150,7 +158,8 @@ export const News = ({ id, articles, topic, remove}) => {
               <p className="level-item">
                 <button
                   className="button is-warning has-text-centered"
-                  onClick={cancelEdit}>
+                  onClick={cancelEdit}
+                >
                   <span className="icon is-small">
                     <FontAwesomeIcon icon={faBan} />
                   </span>
@@ -161,7 +170,8 @@ export const News = ({ id, articles, topic, remove}) => {
             <p className="level-item">
               <button
                 className="button is-dark has-text-centered"
-                onClick={editNews}>
+                onClick={editNews}
+              >
                 <span className="icon is-small">
                   <FontAwesomeIcon icon={faPencilAlt} />
                 </span>
@@ -171,7 +181,8 @@ export const News = ({ id, articles, topic, remove}) => {
           <p className="level-item">
             <button
               className="button is-danger is-outlined has-text-centered"
-              onClick={openModal}>
+              onClick={openModal}
+            >
               <span className="icon is-small">
                 <FontAwesomeIcon icon={faTimes} />
               </span>
