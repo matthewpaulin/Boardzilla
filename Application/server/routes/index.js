@@ -20,23 +20,6 @@ router.use("/api/stocks", stocks);
 router.use("/api/weather", weather);
 router.use("/api/events", events);
 
-router.get("/api/tags", (req, res) => {
-  res.send([
-    "MERN",
-    "Node",
-    "Express",
-    "Webpack",
-    "React",
-    "Redux",
-    "Mongoose",
-    "Bulma",
-    "Fontawesome",
-    "Ramda",
-    "ESLint",
-    "Enzyme",
-  ]);
-});
-
 router.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../../dist", "index.html"));
 });
