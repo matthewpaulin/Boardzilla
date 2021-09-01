@@ -197,7 +197,88 @@ export const News = ({ id, articles, topic, remove }) => {
       />
     </div>
   ) : (
-    <></>
+    <div className={`card px-2 height-100`}>
+      <div className="card-content">No Data Found</div>
+      <div className="card-footer level py-2">
+        <div className="level-left">
+          {edit ? (
+            <div className="level-item">
+              <div className="field">
+                <p className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="News topic"
+                    value={currentTopic}
+                    onChange={updateTopic}
+                  />
+                </p>
+              </div>
+            </div>
+          ) : (
+            <p className="level-item">
+              News about:
+              <span className="has-text-weight-semibold pl-2">{`${
+                topic ||
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              }`}</span>
+            </p>
+          )}
+        </div>
+        <div className="level-right">
+          {edit ? (
+            <>
+              <p className="level-item">
+                <button
+                  className="button is-success"
+                  onClick={handleUpdateNews}
+                >
+                  <span className="icon is-small">
+                    <FontAwesomeIcon icon={faSave} />
+                  </span>
+                </button>
+              </p>
+              <p className="level-item">
+                <button
+                  className="button is-warning has-text-centered"
+                  onClick={cancelEdit}
+                >
+                  <span className="icon is-small">
+                    <FontAwesomeIcon icon={faBan} />
+                  </span>
+                </button>
+              </p>
+            </>
+          ) : (
+            <p className="level-item">
+              <button
+                className="button is-dark has-text-centered"
+                onClick={editNews}
+              >
+                <span className="icon is-small">
+                  <FontAwesomeIcon icon={faPencilAlt} />
+                </span>
+              </button>
+            </p>
+          )}
+          <p className="level-item">
+            <button
+              className="button is-danger is-outlined has-text-centered"
+              onClick={openModal}
+            >
+              <span className="icon is-small">
+                <FontAwesomeIcon icon={faTimes} />
+              </span>
+            </button>
+          </p>
+        </div>
+      </div>
+      <ConfirmModal
+        confirm={confirm}
+        closeModal={closeModal}
+        deleteWidget={deleteNews}
+      />
+    </div>
   );
 };
 export default News;

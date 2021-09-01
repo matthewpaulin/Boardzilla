@@ -4,7 +4,7 @@
   "description": "An app to create personalized dashboards constructed with a variety of customizable widgets.",
   "main": "server/index.js",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "set NODE_ENV=production && node server/index.js",
     "start-dev": "nodemon server/index.js",
     "dev": "set NODE_ENV=development && webpack --mode=development --config ./config/webpack.dev.config.js --watch",
     "prod": "set NODE_ENV=production && webpack --mode=production --config ./config/webpack.prod.config.js"

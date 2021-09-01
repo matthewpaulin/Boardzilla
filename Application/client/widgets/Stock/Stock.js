@@ -218,7 +218,87 @@ export const Stock = ({ id, dailyData, symbol, remove }) => {
       />
     </div>
   ) : (
-    <>No Data Found</>
+    <div className={`card px-2 height-100`}>
+      <div className="card-content">No Data Found</div>
+      <div className="card-footer level py-2">
+        <div className="level-left">
+          {edit ? (
+            <div className="level-item">
+              <div className="field">
+                <p className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="ticker symbol"
+                    value={currentSymbol}
+                    onChange={updateSymbol}
+                  />
+                </p>
+              </div>
+            </div>
+          ) : (
+            <p className="level-item is-size-4">
+              Stock:
+              <span className="has-text-weight-semibold pl-2">{`${
+                symbol || ""
+              }`}</span>
+            </p>
+          )}
+        </div>
+        <div className="level-right">
+          {edit ? (
+            <>
+              <p className="level-item">
+                <button
+                  className="button is-success"
+                  onClick={handleUpdateStock}
+                >
+                  <span className="icon is-small">
+                    <FontAwesomeIcon icon={faSave} />
+                  </span>
+                </button>
+              </p>
+              <p className="level-item">
+                <button
+                  className="button is-warning has-text-centered"
+                  onClick={cancelEdit}
+                >
+                  <span className="icon is-small">
+                    <FontAwesomeIcon icon={faBan} />
+                  </span>
+                </button>
+              </p>
+            </>
+          ) : (
+            <p className="level-item">
+              <button
+                className="button is-dark has-text-centered"
+                onClick={editStock}
+              >
+                <span className="icon is-small">
+                  <FontAwesomeIcon icon={faPencilAlt} />
+                </span>
+              </button>
+            </p>
+          )}
+          <p className="level-item">
+            <button
+              className="button is-danger is-outlined has-text-centered"
+              onClick={openModal}
+            >
+              <span className="icon is-small">
+                <FontAwesomeIcon icon={faTimes} />
+              </span>
+            </button>
+          </p>
+        </div>
+      </div>
+      <ConfirmModal
+        confirm={confirm}
+        closeModal={closeModal}
+        deleteWidget={deleteStock}
+      />
+    </div>
   );
 };
 export default Stock;

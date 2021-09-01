@@ -203,7 +203,111 @@ export const Weather = ({
       />
     </div>
   ) : (
-    <>No Data Found</>
+    <div className={`card px-2 height-100`}>
+      <div>No Data Found</div>
+      <div className="card-footer widget-footer py-2">
+        <div className="left">
+          {edit && (
+            <>
+              <div>
+                <div className="field">
+                  <p className="control">
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="City"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <div className="field">
+                  <p className="control">
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="State/Province"
+                      value={stateName}
+                      onChange={(e) => setStateName(e.target.value)}
+                    />
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <div className="field">
+                  <p className="control">
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="Country"
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
+                    />
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+        <div className="right">
+          {edit ? (
+            <>
+              <p>
+                <button
+                  className="button is-success"
+                  onClick={handleUpdateWeather}
+                >
+                  <span className="icon is-small">
+                    <FontAwesomeIcon icon={faSave} />
+                  </span>
+                </button>
+              </p>
+              <p>
+                <button
+                  className="button is-warning has-text-centered"
+                  onClick={cancelEdit}
+                >
+                  <span className="icon is-small">
+                    <FontAwesomeIcon icon={faBan} />
+                  </span>
+                </button>
+              </p>
+            </>
+          ) : (
+            <p>
+              <button
+                className="button is-dark has-text-centered"
+                onClick={() => setEdit(true)}
+              >
+                <span className="icon is-small">
+                  <FontAwesomeIcon icon={faPencilAlt} />
+                </span>
+              </button>
+            </p>
+          )}
+          <p>
+            <button
+              className="button is-danger is-outlined has-text-centered"
+              onClick={openModal}
+            >
+              <span className="icon is-small">
+                <FontAwesomeIcon icon={faTimes} />
+              </span>
+            </button>
+          </p>
+        </div>
+      </div>
+
+      <ConfirmModal
+        confirm={confirm}
+        closeModal={closeModal}
+        deleteWidget={deleteWeather}
+      />
+    </div>
   );
 };
 export default Weather;

@@ -101,8 +101,8 @@ router.post("/", requireAuth, (req, res) => {
       .then((res) => res.json())
       .then((json) => {
         req.body.user = req.user.id;
-        req.body.width = req.body.width || 3;
-        req.body.height = req.body.height || 2;
+        req.body.width = req.body.width || 5;
+        req.body.height = req.body.height || 3;
         req.body.x = req.body.x || 0;
         req.body.y = req.body.y || 0;
 
@@ -116,7 +116,10 @@ router.post("/", requireAuth, (req, res) => {
           low: [],
           volume: [],
         };
-
+        if (!json["Time Series (Daily)"]) {
+          res.status(400).send({ message: "Create stock widget failed", err });
+          return;
+        }
         for (let key in json["Time Series (Daily)"]) {
           req.body.dailyData.dateTime.push(key);
           req.body.dailyData.lowest = Math.min(

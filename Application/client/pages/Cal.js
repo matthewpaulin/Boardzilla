@@ -54,79 +54,77 @@ export const Cal = () => {
 
   return (
     !loading && (
-      <div className="container">
-        <div className="card px-2 py-2 height-100" style={{ overflow: "auto" }}>
-          <div className="content has-text-centered">
-            <div className="calendar mb-2">
-              <div className="calendar__container">
-                <main className="calendar__container__content">
-                  <Calendar
-                    onChange={setDate}
-                    value={date}
-                    className="react-calendar"
-                    tileContent={({ date, view }) =>
-                      view === "month" && hasEvent(date) ? (
-                        <span className="icon is-large pl-3">
-                          <FontAwesomeIcon icon={faExclamationCircle} />
-                        </span>
-                      ) : null
-                    }
-                  />
-                </main>
-              </div>
-            </div>
-            <button
-              className="button mb-2 is-dark is-rounded"
-              onClick={() => setAdd(true)}
-            >
-              Add Event
-            </button>
-            {add ? (
-              <div>
-                <textarea
-                  className="textarea is-link"
-                  placeholder="event"
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
+      <div className="card px-2 py-2 height-100" style={{ overflow: "auto" }}>
+        <div className="content has-text-centered">
+          <div className="calendar mb-2">
+            <div className="calendar__container">
+              <main className="calendar__container__content">
+                <Calendar
+                  onChange={setDate}
+                  value={date}
+                  className="react-calendar"
+                  tileContent={({ date, view }) =>
+                    view === "month" && hasEvent(date) ? (
+                      <span className="icon is-large pl-3">
+                        <FontAwesomeIcon icon={faExclamationCircle} />
+                      </span>
+                    ) : null
+                  }
                 />
-                <button
-                  className="button is-dark is-outlined m-3"
-                  onClick={cancelAddEvent}
-                >
-                  Cancel
-                </button>
-                <button className="button is-dark m-3" onClick={handleAddEvent}>
-                  Save
-                </button>
-              </div>
-            ) : (
-              events
-                .filter((widget) => sameDay(new Date(widget.date), date))
-                .map((w) => {
-                  return (
-                    <article className="message is-link" key={w.id}>
-                      <div className="message-header">
-                        <button
-                          className="delete"
-                          aria-label="delete"
-                          onClick={() => dispatch(attemptDeleteEvent(w.id))}
-                        ></button>
-                      </div>
-                      <div
-                        className="message-body"
-                        style={{
-                          borderBottom: "1px solid black",
-                          borderRight: "1px solid black",
-                          borderLeft: "1px solid black",
-                        }}
-                      >
-                        {w.text}
-                      </div>
-                    </article>
-                  );
-                })
-            )}
+              </main>
+            </div>
           </div>
+          <button
+            className="button mb-2 is-dark is-rounded"
+            onClick={() => setAdd(true)}
+          >
+            Add Event
+          </button>
+          {add ? (
+            <div>
+              <textarea
+                className="textarea is-link"
+                placeholder="event"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+              <button
+                className="button is-dark is-outlined m-3"
+                onClick={cancelAddEvent}
+              >
+                Cancel
+              </button>
+              <button className="button is-dark m-3" onClick={handleAddEvent}>
+                Save
+              </button>
+            </div>
+          ) : (
+            events
+              .filter((widget) => sameDay(new Date(widget.date), date))
+              .map((w) => {
+                return (
+                  <article className="message is-link" key={w.id}>
+                    <div className="message-header">
+                      <button
+                        className="delete"
+                        aria-label="delete"
+                        onClick={() => dispatch(attemptDeleteEvent(w.id))}
+                      ></button>
+                    </div>
+                    <div
+                      className="message-body"
+                      style={{
+                        borderBottom: "1px solid black",
+                        borderRight: "1px solid black",
+                        borderLeft: "1px solid black",
+                      }}
+                    >
+                      {w.text}
+                    </div>
+                  </article>
+                );
+              })
+          )}
         </div>
       </div>
     )
